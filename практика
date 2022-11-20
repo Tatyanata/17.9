@@ -42,9 +42,7 @@ while True:
             raise Exception
         break
     except ValueError:
-        print("Нужно ввести число!")
+        print("Нужно ввести число")
     except Exception:
-        print("Неправильный диапазон!")
-
-
+        print("Неверный диапазон")
 print(b_search(array, element, 0,  len(array)))
