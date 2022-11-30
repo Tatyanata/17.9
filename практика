@@ -1,48 +1,18 @@
-array = [int(x) for x in input(" Введите какие-либо числа от 1 до 100: ").split()]
-def s_sort(array):
-    if len(array) < 2:
-        return array[:]
-    else:
-        middle = len(array) // 2
-        left = s_sort(array[:middle])
-        right = s_sort(array[middle:])
-        return s(left, right)
-def merge(left, right):
-    result = []
-    i, j = 0, 0
-    while i < len(left) and j < len(right):
-        if left[i] < right[j]:
-            result.append(left[i])
-            i += 1
-        else:
-            result.append(right[j])
-            j += 1
-    while i < len(left):
-        result.append(left[i])
-        i += 1
-    while j < len(right):
-        result.append(right[j])
-        j += 1
-    return result
-    print(s_sort(array))
-def b_search(array, element, left, right):
-    if left > right: 
-        return False 
-    middle = (right + left) // 2 
-    if array[middle] == element:  
-        return middle 
-    elif element < array[middle]: 
-        return b_search(array, element, left, middle - 1)
-    else:  
-        return b_search(array, element, right, middle + 1)
-while True:
-    try:
-        element = int(input("Введите число от 1 до 100: "))
-        if element < 0 or element > 100:
-            raise Exception
-        break
-    except ValueError:
-        print("Нужно ввести число")
-    except Exception:
-        print("Неверный диапазон")
-print(b_search(array, element, 0,  len(array)))
+array = input("Введите какие-либо числа от 1 до 100 через пробел: ")
+arr_list = [int(x) for x in array.split()]
+
+num = int(input("Введите любое число от 1 до 100: "))
+if num % 1 == 0:
+    arr_list.append(num)
+    print("Список до сортировки: ", arr_list)
+
+def my_sort(arr_list):
+    for i in range(len(arr_list)):  # проходим по всему массиву
+        idx_min = i  # сохраняем индекс предположительно минимального элемента
+        for j in range(i, len(arr_list)):
+            if arr_list[j] < arr_list[idx_min]:
+                idx_min = j
+        if i != idx_min:  # если индекс не совпадает с минимальным, меняем
+            arr_list[i], arr_list[idx_min] = arr_list[idx_min], arr_list[i]
+    return arr_list
+print("Список после сортировки:", my_sort(arr_list))
